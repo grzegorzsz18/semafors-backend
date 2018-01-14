@@ -31,4 +31,8 @@ public class ReservationSchedulerVissibility {
 		}
 		reservationDAO.updateVissibilities(reservationsToChange);
 	}
+
+	public void setReservationDAO(ReservationDAO reservationDAO) {
+		this.reservationDAO = reservationDAO;
+	}
 }

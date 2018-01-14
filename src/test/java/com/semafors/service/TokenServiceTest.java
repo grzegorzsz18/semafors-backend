@@ -11,7 +11,6 @@ import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 import com.semafors.Exception.WrongUserOrPasswordException;
 import com.semafors.Exception.WrongUserTokenException;
-import com.semafors.dao.implementations.UserDAOImpl;
 import com.semafors.dao.interfaces.UserDAO;
 import com.semafors.entity.User;
 import com.semafors.service.token.TokenService;
@@ -20,10 +19,10 @@ import com.semafors.service.token.TokenService;
 public class TokenServiceTest {
 
 	@InjectMocks
-	static TokenService tokenService = new TokenService();
+    private static TokenService tokenService ;
 	@Mock
-	UserDAO userDao = new UserDAOImpl();
-	User user;
+    private UserDAO userDao ;
+	private User user;
 
 	@Before
 	public void before() {
@@ -35,7 +34,6 @@ public class TokenServiceTest {
 	@Test
 	public void goodPasswordShouldntThrowsException() throws Exception {
 		Mockito.when(userDao.getUserByLogin("login")).thenReturn(user);
-		tokenService.setUserDao(userDao);
 		tokenService.loginUser(user);
 	}
 
@@ -50,6 +48,7 @@ public class TokenServiceTest {
 	public void checkTokenShouldntThrowException() throws WrongUserTokenException {
 		UUID tokenValue = UUID.randomUUID();
 		Mockito.when(userDao.getByToken(tokenValue)).thenReturn(user);
+		tokenService.setUserDao(userDao);
 		tokenService.checkToken(tokenValue);
 	}
 	
@@ -57,6 +56,7 @@ public class TokenServiceTest {
 	public void checkTokenShouldThrowException() throws WrongUserTokenException {
 		UUID tokenValue = UUID.randomUUID();
 		Mockito.when(userDao.getByToken(tokenValue)).thenReturn(null);
+		tokenService.setUserDao(userDao);
 		tokenService.checkToken(tokenValue);
 	}
 }

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.semafors.dao.interfaces.UserDAO;
-import com.semafors.entity.Token;
 import com.semafors.entity.User;
 
 @Repository

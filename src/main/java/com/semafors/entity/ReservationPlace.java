@@ -2,12 +2,10 @@ package com.semafors.entity;
 
 import java.io.Serializable;
 import java.util.List;
-import java.util.UUID;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -15,7 +13,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @SuppressWarnings("unchecked")
@@ -29,13 +26,16 @@ public class ReservationPlace implements Serializable{
 	@JsonIgnore
 	@OneToMany(targetEntity = Reservation.class, mappedBy = "reservationPlace",
             cascade = CascadeType.ALL)
-	List<Reservation> reservations;
+    private
+    List<Reservation> reservations;
 	@JsonIgnore
 	@OneToMany(targetEntity = Reservation.class, mappedBy = "reservationPlace",
             cascade = CascadeType.ALL)
-	List<Reservation> expiredReservations;
+    private
+    List<Reservation> expiredReservations;
 	@Column(name = "place_name")
-	String name;
+    private
+    String name;
 	
 	public ReservationPlace() {
 		

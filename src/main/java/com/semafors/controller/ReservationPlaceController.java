@@ -5,8 +5,6 @@ package com.semafors.controller;
 import java.util.List;
 import java.util.UUID;
 
-import javax.websocket.server.PathParam;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.semafors.Exception.WrongUserTokenException;
-import com.semafors.dao.implementations.ReservationPlacesDAOImpl;
 import com.semafors.entity.ReservationPlace;
 import com.semafors.service.ReservationPlacesService;
 import com.semafors.service.token.TokenService;

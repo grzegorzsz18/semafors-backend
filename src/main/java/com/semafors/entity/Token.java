@@ -1,19 +1,19 @@
 package com.semafors.entity;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import java.io.Serializable;
 import java.util.UUID;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
 
-import org.hibernate.annotations.Type;
-
 @Embeddable
 public class Token implements Serializable{
 	
 	@Column(columnDefinition = "BINARY(16)")
-	UUID value;
-	Long creationTime;
+	private UUID value;
+	private Long creationTime;
 
 	public Token() {
 	}

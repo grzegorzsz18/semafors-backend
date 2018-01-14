@@ -2,18 +2,14 @@ package com.semafors.entity;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name = "reservation")
@@ -22,23 +18,28 @@ public class Reservation implements Serializable{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "reservation_id")
-	Long id;
+    private
+    Long id;
 	@Column(name = "start_time")
-	Long startTime;
+    private
+    Long startTime;
 	@Column(name = "endTime")
-	Long endTime;
-	//@JsonBackReference("user-reservation")
+    private
+    Long endTime;
 	@ManyToOne
 	@JoinColumn(name = "user_id")
-	User user;
+    private
+    User user;
 	@Column(name = "vissibility")
-	Boolean vissibility;
-	//@JsonBackReference("res-places")
+    private
+    Boolean vissibility;
 	@ManyToOne
 	@JoinColumn(name = "reservation_place_id")
-	ReservationPlace reservationPlace;
+    private
+    ReservationPlace reservationPlace;
 	@Column(name = "during")
-	Long during;
+    private
+    Long during;
 	
 	
 	
@@ -59,18 +60,13 @@ public class Reservation implements Serializable{
 	public Reservation() {
 		
 	}
-	
 
 	public Long getId() {
 		return id;
 	}
-
-
 	public void setId(Long id) {
 		this.id = id;
 	}
-
-
 	public Long getStartTime() {
 		return startTime;
 	}
@@ -95,19 +91,15 @@ public class Reservation implements Serializable{
 	public void setVissibility(Boolean vissibility) {
 		this.vissibility = vissibility;
 	}
-
 	public ReservationPlace getReservationPlace() {
 		return reservationPlace;
 	}
-
 	public void setReservationPlace(ReservationPlace reservationPlace) {
 		this.reservationPlace = reservationPlace;
 	}
-
 	public Long getDuring() {
 		return during;
 	}
-
 	public void setDuring(Long during) {
 		this.during = during;
 	}

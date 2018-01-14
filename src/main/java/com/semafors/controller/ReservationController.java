@@ -1,21 +1,15 @@
 package com.semafors.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.semafors.dto.UserReservationAndPlace;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.semafors.Exception.WrongUserTokenException;
-import com.semafors.dao.interfaces.ReservationDAO;
 import com.semafors.entity.Reservation;
-import com.semafors.entity.User;
 import com.semafors.service.reservation.ResrervationService;
 
 @RestController
@@ -52,5 +46,11 @@ public class ReservationController {
 	@PostMapping("/delete/{id}/{tokenValue}")
 	public void deleteReservation(@PathVariable("id") long id, @PathVariable("tokenValue") UUID tokenValue) throws WrongUserTokenException {
 		reservationService.removeReservation(id, tokenValue);
+	}
+
+	@CrossOrigin
+	@GetMapping("all/{tokenValue}")
+	public List<UserReservationAndPlace> getAllReservationForAdmin(@PathVariable("tokenValue") UUID tokenValue) throws Exception{
+		return reservationService.getAllFutureForAdmin(tokenValue);
 	}
 }

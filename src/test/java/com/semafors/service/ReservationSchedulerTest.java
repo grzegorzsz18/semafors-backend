@@ -1,8 +1,6 @@
 package com.semafors.service;
 
-import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
@@ -12,20 +10,17 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import com.semafors.entity.Reservation;
 import com.semafors.service.reservation.ReservationScheduler;
 
 public class ReservationSchedulerTest {
 	
-	static ReservationScheduler rs;
-	List<Reservation> reservations;
-	List<Reservation> expected;
-	long duration = 1000000l;
-	long time;
+	private static ReservationScheduler rs;
+	private List<Reservation> reservations;
+	private List<Reservation> expected;
+	private final long duration = 1000000l;
+	private long time;
 	
 	@BeforeClass
 	public static void beforeClass() {

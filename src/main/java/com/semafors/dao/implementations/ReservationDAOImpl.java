@@ -1,19 +1,17 @@
 package com.semafors.dao.implementations;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.semafors.dao.interfaces.ReservationDAO;
-import com.semafors.dao.interfaces.ReservationPlacesDAO;
 import com.semafors.entity.Reservation;
-import com.semafors.entity.ReservationPlace;
 
 @Repository
 @Transactional
@@ -26,12 +24,17 @@ public class ReservationDAOImpl implements ReservationDAO{
 	public void addReservation(Reservation reservation) {
 		entityManager.persist(reservation);
 	}
-	
+
+	@Override
+	public ArrayList<Reservation> getAllFuture() {
+		Query query = entityManager.createQuery("SELECT r from Reservation r WHERE r.vissibility = TRUE ORDER BY r.startTime", Reservation.class);
+		return (ArrayList<Reservation>)query.getResultList();
+	}
+
 	@SuppressWarnings("unchecked")
 	public List<Reservation> getFutureByUser(Long userId) {
 		Query query = entityManager.createQuery("SELECT r FROM Reservation r WHERE r.user.id = :user_id and r.vissibility = True ORDER BY r.startTime",Reservation.class)
 				.setParameter("user_id", userId);
-		List<Reservation> r = (List<Reservation>)query.getResultList();
 		return (List<Reservation>)query.getResultList();
 	}
 

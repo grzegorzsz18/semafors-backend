@@ -2,12 +2,8 @@ package com.semafors.service.reservation;
 
 import java.util.List;
 
-import org.hibernate.annotations.Synchronize;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
-import com.semafors.dao.interfaces.ReservationDAO;
 import com.semafors.entity.Reservation;
 
 @Service

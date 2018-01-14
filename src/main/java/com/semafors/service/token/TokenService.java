@@ -2,7 +2,6 @@ package com.semafors.service.token;
 
 import java.util.UUID;
 
-import org.hibernate.WrongClassException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

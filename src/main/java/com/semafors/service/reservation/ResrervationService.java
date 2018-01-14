@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import com.semafors.Exception.NotPermissionException;
+import com.semafors.dto.UserReservationAndPlace;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,7 +15,6 @@ import com.semafors.dao.interfaces.ReservationDAO;
 import com.semafors.dao.interfaces.UserDAO;
 import com.semafors.entity.Reservation;
 import com.semafors.entity.User;
-import com.semafors.service.UserService;
 import com.semafors.service.token.TokenService;
 
 @Service
@@ -59,5 +60,24 @@ public class ResrervationService {
 	public void removeReservation(Long id, UUID tokenValue) throws WrongUserTokenException {
 		tokenService.checkToken(tokenValue);
 		reservationDAO.deleteReservation(id);
+	}
+
+	public List<UserReservationAndPlace> getAllFutureForAdmin(UUID tokenValue) throws Exception{
+		tokenService.checkToken(tokenValue);
+		User user = userDAO.getByToken(tokenValue);
+		if(!user.isAdmin()){
+			throw new NotPermissionException();
+		}
+		ArrayList<Reservation> reservations = reservationDAO.getAllFuture();
+		ArrayList<UserReservationAndPlace> userReservationAndPlaces = new ArrayList<>();
+		for(Reservation r:reservations){
+			UserReservationAndPlace urap = new UserReservationAndPlace();
+			urap.setReservation(r);
+			urap.setReservationPlace(r.getReservationPlace());
+			urap.setUserName(r.getUser().getLogin());
+			userReservationAndPlaces.add(urap);
+		}
+		return userReservationAndPlaces;
+
 	}
 }

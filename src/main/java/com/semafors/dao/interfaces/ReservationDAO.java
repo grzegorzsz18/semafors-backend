@@ -1,15 +1,17 @@
 package com.semafors.dao.interfaces;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.semafors.entity.Reservation;
 
 public interface ReservationDAO {
-	public void addReservation(Reservation reservation);
-	public List<Reservation> getFutureByUser(Long userId);
-	public List<Reservation> getExpiredReservations(Long userId);
-	public List<Reservation> getAllByPlace(Long placeId);
-	public List<Reservation> getAllVissible();
-	public void updateVissibilities(List<Reservation> reservations);
-	public void deleteReservation(Long reservationId);
+	void addReservation(Reservation reservation);
+	ArrayList<Reservation> getAllFuture();
+	List<Reservation> getFutureByUser(Long userId);
+	List<Reservation> getExpiredReservations(Long userId);
+	List<Reservation> getAllByPlace(Long placeId);
+	List<Reservation> getAllVissible();
+	void updateVissibilities(List<Reservation> reservations);
+	void deleteReservation(Long reservationId);
 }
