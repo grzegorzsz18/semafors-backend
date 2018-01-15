@@ -42,7 +42,8 @@ public class ReservationController {
 	public void addReservation(@RequestBody Reservation reservation, @PathVariable("tokenValue") UUID tokenValue) throws WrongUserTokenException{
 		reservationService.addReservation(reservation, tokenValue);
 	}
-	
+
+	@CrossOrigin
 	@PostMapping("/delete/{id}/{tokenValue}")
 	public void deleteReservation(@PathVariable("id") long id, @PathVariable("tokenValue") UUID tokenValue) throws WrongUserTokenException {
 		reservationService.removeReservation(id, tokenValue);

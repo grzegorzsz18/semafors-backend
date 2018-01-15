@@ -36,8 +36,7 @@ public class User implements Serializable{
 	@JsonIgnore
 	@OneToMany(targetEntity = Reservation.class, mappedBy = "user",
             cascade = CascadeType.ALL)
-    private
-    List<Reservation> reservations;
+    private List<Reservation> reservations;
 	private Token token;
 	
 	public User() {

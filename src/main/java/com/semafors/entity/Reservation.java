@@ -30,9 +30,7 @@ public class Reservation implements Serializable{
 	@JoinColumn(name = "user_id")
     private
     User user;
-	@Column(name = "vissibility")
-    private
-    Boolean vissibility;
+    private boolean vissibility;
 	@ManyToOne
 	@JoinColumn(name = "reservation_place_id")
     private
