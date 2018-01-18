@@ -27,7 +27,7 @@ public class ReservationPlaceController {
 
 	@CrossOrigin
 	@PutMapping("add/{tokenValue}")
-	public void addNewReservationPlace(@RequestBody ReservationPlace reservationPlace, @PathVariable("tokenValue") UUID tokenValue) {
+	public void addNewReservationPlace(@RequestBody ReservationPlace reservationPlace, @PathVariable("tokenValue") UUID tokenValue) throws Exception{
 		reservationPlacesService.addReservationPlace(reservationPlace, tokenValue);
 	}
 	
