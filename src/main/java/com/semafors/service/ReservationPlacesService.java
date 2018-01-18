@@ -2,6 +2,9 @@ package com.semafors.service;
 import java.util.List;
 import java.util.UUID;
 
+import com.semafors.Exception.NotPermissionException;
+import com.semafors.dao.interfaces.UserDAO;
+import com.semafors.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,8 +17,14 @@ import com.semafors.service.token.TokenService;
 public class ReservationPlacesService {
 	@Autowired ReservationPlacesDAO r;
 	@Autowired TokenService tokenService;
+	@Autowired UserDAO userDAO;
 	
-	public void addReservationPlace(ReservationPlace reservationPlace) {
+	public void addReservationPlace(ReservationPlace reservationPlace, UUID tokenValue) throws Exception {
+		tokenService.checkToken(tokenValue);
+		User user = userDAO.getByToken(tokenValue);
+		if(!user.isAdmin()){
+			throw new NotPermissionException();
+		}
 		r.addReservationPlace(reservationPlace);
 	}
 	

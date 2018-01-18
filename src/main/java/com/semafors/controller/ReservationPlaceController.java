@@ -8,12 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.semafors.Exception.WrongUserTokenException;
 import com.semafors.entity.ReservationPlace;
@@ -29,10 +24,11 @@ public class ReservationPlaceController {
 
 	@Autowired TokenService tokenService;
 	@Autowired ReservationPlacesService reservationPlacesService;
-	
-	@PutMapping("add")
-	public void addNewReservationPlace(@RequestBody ReservationPlace reservationPlace) {
-		reservationPlacesService.addReservationPlace(reservationPlace);
+
+	@CrossOrigin
+	@PutMapping("add/{tokenValue}")
+	public void addNewReservationPlace(@RequestBody ReservationPlace reservationPlace, @PathVariable("tokenValue") UUID tokenValue) {
+		reservationPlacesService.addReservationPlace(reservationPlace, tokenValue);
 	}
 	
 	@GetMapping("all/{tokenValue}")
